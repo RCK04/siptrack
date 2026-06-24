@@ -1,6 +1,6 @@
-import { Show, UserButton } from "@clerk/react";
 import { Link } from "@tanstack/react-router";
-import { DropletIcon } from "lucide-react";
+
+import { NavigationMenu } from "./components/NavigationMenu";
 
 import {
   Card,
@@ -18,22 +18,7 @@ const HomePage = () => {
   return (
     <>
       <Header>
-        <div className="flex items-center gap-3">
-          <Show when="signed-out">
-            <Button asChild variant="ghost">
-              <Link to="/sign-in/$">Sign in</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/sign-up/$">Create account</Link>
-            </Button>
-          </Show>
-          <Show when="signed-in">
-            <Button asChild variant="secondary">
-              <Link to="/app">Dashboard</Link>
-            </Button>
-            <UserButton />
-          </Show>
-        </div>
+        <NavigationMenu />
       </Header>
       
       <main className="mx-auto flex min-h-svh w-full max-w-6xl flex-col gap-10 px-6 py-8">
