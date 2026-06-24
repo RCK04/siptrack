@@ -110,6 +110,7 @@ console.log("\n🚀 Starting build process...\n");
 
 const cliConfig = parseArgs();
 const outdir = cliConfig.outdir || path.join(process.cwd(), "dist");
+const clerkPublishableKey = process.env.BUN_PUBLIC_CLERK_PUBLISHABLE_KEY ?? "";
 
 if (existsSync(outdir)) {
   console.log(`🗑️ Cleaning previous build at ${outdir}`);
@@ -132,6 +133,9 @@ const result = await Bun.build({
   sourcemap: "linked",
   define: {
     "process.env.NODE_ENV": JSON.stringify("production"),
+    "process.env.BUN_PUBLIC_CLERK_PUBLISHABLE_KEY": JSON.stringify(
+      clerkPublishableKey,
+    ),
   },
   ...cliConfig,
 });
