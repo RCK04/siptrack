@@ -1,6 +1,12 @@
 import { Hono } from "hono";
 import { healthRoutes } from "./routes/health";
 
-export const api = new Hono().basePath("/api");
+export const createApi = () => {
+  const app = new Hono().basePath("/api");
 
-api.route("/health", healthRoutes);
+  app.route("/health", healthRoutes);
+
+  return app;
+};
+
+export const api = createApi();
