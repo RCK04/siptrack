@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Onest:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
+@config "../tailwind.config.ts";
 
 /* Hydration Flow Design System */
 @theme inline {
@@ -39,39 +40,6 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-water-50: #f0f9ff;
-  --color-water-100: #e0f2fe;
-  --color-water-200: #bae6fd;
-  --color-water-300: #7dd3fc;
-  --color-water-400: #38bdf8;
-  --color-water-500: #0ea5e9;
-  --color-water-600: #0284c7;
-  --color-water-700: #0369a1;
-  --color-water-800: #075985;
-  --color-water-900: #0c3d66;
-
-  --color-teal-50: #f0fdfa;
-  --color-teal-100: #ccfbf1;
-  --color-teal-200: #99f6e4;
-  --color-teal-300: #5eead4;
-  --color-teal-400: #2dd4bf;
-  --color-teal-500: #14b8a6;
-  --color-teal-600: #0d9488;
-  --color-teal-700: #0f766e;
-  --color-teal-800: #134e4a;
-  --color-teal-900: #0d3b36;
-
-  --color-mint-50: #f0fdf4;
-  --color-mint-100: #dcfce7;
-  --color-mint-200: #bbf7d0;
-  --color-mint-300: #86efac;
-  --color-mint-400: #4ade80;
-  --color-mint-500: #22c55e;
-  --color-mint-600: #16a34a;
-  --color-mint-700: #15803d;
-  --color-mint-800: #166534;
-  --color-mint-900: #145231;
-
   /* Typography */
   --font-sans: 'Outfit', system-ui, sans-serif;
   --font-display: 'Outfit', system-ui, sans-serif;
@@ -94,40 +62,40 @@
 :root {
   --radius: 0.75rem;
 
-  --background: #f9fafb;
-  --foreground: #374151;
+  --background: theme("colors.flow.paper");
+  --foreground: theme("colors.flow.ink");
 
   --card: #ffffff;
-  --card-foreground: #374151;
+  --card-foreground: theme("colors.flow.ink");
   --popover: #ffffff;
-  --popover-foreground: #374151;
+  --popover-foreground: theme("colors.flow.ink");
 
-  --primary: #38bdf8;
-  --primary-foreground: #ffffff;
-  --primary-light: #e0f2fe;
-  --primary-dark: #0284c7;
+  --primary: theme("colors.flow.ink");
+  --primary-foreground: theme("colors.flow.paper");
+  --primary-light: theme("colors.flow.surface");
+  --primary-dark: theme("colors.teal.700");
 
-  --secondary: #2dd4bf;
+  --secondary: theme("colors.teal.700");
   --secondary-foreground: #ffffff;
 
-  --accent: #e0f2fe;
-  --accent-foreground: #0369a1;
-  --accent-secondary: #4ade80;
-  --accent-tertiary: #facc15;
+  --accent: theme("colors.flow.hover");
+  --accent-foreground: theme("colors.flow.ink");
+  --accent-secondary: theme("colors.mint.400");
+  --accent-tertiary: theme("colors.feedback.caution");
 
-  --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
+  --muted: theme("colors.flow.surface");
+  --muted-foreground: theme("colors.flow.muted");
 
-  --destructive: #ef4444;
+  --destructive: theme("colors.feedback.danger");
   --destructive-foreground: #ffffff;
-  --success: #4ade80;
-  --success-foreground: #145231;
-  --warning: #facc15;
-  --warning-foreground: #713f12;
+  --success: theme("colors.mint.400");
+  --success-foreground: theme("colors.mint.900");
+  --warning: theme("colors.feedback.caution");
+  --warning-foreground: theme("colors.feedback.warningForeground");
 
-  --border: #e5e7eb;
+  --border: theme("colors.flow.line");
   --input: #ffffff;
-  --ring: #38bdf8;
+  --ring: theme("colors.teal.700");
 }
 
 @layer base {

@@ -37,10 +37,12 @@ const serveProductionAsset = async (request: Request) => {
 };
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+const hostname = process.env.HOST ?? "0.0.0.0";
 
 const server = isProduction
   ? serve({
       port,
+      hostname,
       routes: {
         "/api/*": req => api.fetch(req),
       },
@@ -48,6 +50,7 @@ const server = isProduction
     })
   : serve({
       port,
+      hostname,
       routes: {
         "/api/*": req => api.fetch(req),
         "/*": index,

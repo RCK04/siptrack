@@ -1,7 +1,8 @@
-import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
+import { Label, PolarAngleAxis, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
 
 import { Card, CardContent } from "@/shared/components/ui/card";
 import { ChartContainer, type ChartConfig } from "@/shared/components/ui/chart";
+import { palette } from "@/shared/theme/palette";
 
 const goal = {
   targetIntake: 25000,
@@ -40,10 +41,8 @@ const CardPercentage = ({
 }: CardPercentageProps) => {
   const progress =
     target > 0
-      ? Math.min((value / target) * 100, 100)
+      ? Math.max(0, Math.min((value / target) * 100, 100))
       : 0;
-
-  const endAngle = (progress / 100) * 360;
 
   const progressData = [
     {
@@ -61,19 +60,22 @@ const CardPercentage = ({
   } satisfies ChartConfig;
 
   return (
-    <Card>
-      <CardContent className="flex items-center gap-4 p-5">
+    <Card className="min-w-0 rounded-lg border-flow-line bg-white/60 py-0 text-flow-ink shadow-none">
+      <CardContent className="flex items-center gap-4 p-5 xl:p-6">
         <ChartContainer
           config={config}
-          className="size-24 shrink-0 aspect-square"
+          aria-label={`${label}: ${Math.round(progress)}% of goal`}
+          role="img"
+          className="aspect-square size-20 shrink-0 [&_.recharts-radial-bar-background-sector]:fill-flow-surface"
         >
           <RadialBarChart
             data={progressData}
             startAngle={90}
-            endAngle={90 - endAngle}
-            innerRadius={32}
-            outerRadius={44}
+            endAngle={-270}
+            innerRadius={29}
+            outerRadius={39}
           >
+            <PolarAngleAxis type="number" domain={[0, 100]} tick={false} axisLine={false} />
             <RadialBar
               dataKey="value"
               background
@@ -99,7 +101,7 @@ const CardPercentage = ({
                       textAnchor="middle"
                       dominantBaseline="middle"
                     >
-                      <tspan className="fill-foreground text-lg font-bold">
+                      <tspan className="fill-flow-ink font-display text-base font-medium">
                         {Math.round(progress)}%
                       </tspan>
                     </text>
@@ -111,16 +113,16 @@ const CardPercentage = ({
         </ChartContainer>
 
         <div className="min-w-0">
-          <p className="text-sm text-muted-foreground">{label}</p>
+          <p className="text-[11px] text-flow-muted">{label}</p>
 
-          <p className="font-display text-2xl font-bold text-foreground">
-            {value.toLocaleString("pt-BR")}
-            <span className="ml-1 text-lg">{unit}</span>
+          <p className="mt-1 font-display text-[26px] leading-tight font-medium text-flow-ink tabular-nums">
+            {value.toLocaleString("en-US")}
+            <span className="ml-1 text-sm font-normal">{unit}</span>
           </p>
 
-          <p className="text-xs text-muted-foreground mt-0.5">
+          <p className="mt-1 text-[11px] text-flow-muted">
             Goal:{" "}
-            {target.toLocaleString("pt-BR", {
+            {target.toLocaleString("en-US", {
               maximumFractionDigits: 0,
             })}{" "}
             {unit}
@@ -133,13 +135,13 @@ const CardPercentage = ({
 
 export const Intakes = () => {
   return (
-    <section className="grid gap-4 md:grid-cols-3">
+    <section aria-label="Hydration overview" className="grid gap-4 lg:grid-cols-3">
       <CardPercentage
         label="Daily Intake"
         value={chartData.dailyIntake}
         target={dailyTarget}
         unit="ml"
-        color="#0ea5e9"
+        color={palette.flow.ink}
       />
 
       <CardPercentage
@@ -147,7 +149,7 @@ export const Intakes = () => {
         value={chartData.averageIntake}
         target={dailyTarget}
         unit="ml"
-        color="#14b8a6"
+        color={palette.teal[700]}
       />
 
       <CardPercentage
@@ -155,7 +157,7 @@ export const Intakes = () => {
         value={chartData.totalIntake}
         target={goal.targetIntake}
         unit="ml"
-        color="#22c55e"
+        color={palette.flow.chart}
       />
     </section>
   );
