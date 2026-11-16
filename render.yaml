@@ -11,3 +11,5 @@ services:
     envVars:
       - key: BUN_PUBLIC_CLERK_PUBLISHABLE_KEY
         sync: false
+      - key: DATABASE_URL
+        sync: false

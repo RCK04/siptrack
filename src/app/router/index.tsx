@@ -1,8 +1,5 @@
-import { createRootRoute, createRoute, createRouter, Outlet } from "@tanstack/react-router";
-import { SignInPage } from "@/features/auth/login/SignInPage";
-import { SignUpPage } from "@/features/auth/register/SignUpPage";
+import { createRootRoute, createRoute, createRouter, lazyRouteComponent, Outlet } from "@tanstack/react-router";
 import HomePage from "@/features/home/HomePage";
-import { WaterIntakePage } from "@/features/water-intake/WaterIntakePage";
 
 const rootRoute = createRootRoute({
   component: () => <Outlet />,
@@ -17,19 +14,19 @@ const indexRoute = createRoute({
 const signInRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/sign-in/$",
-  component: SignInPage,
+  component: lazyRouteComponent(() => import("@/features/auth/login/SignInPage"), "SignInPage"),
 });
 
 const signUpRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/sign-up/$",
-  component: SignUpPage,
+  component: lazyRouteComponent(() => import("@/features/auth/register/SignUpPage"), "SignUpPage"),
 });
 
 const appRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/app",
-  component: WaterIntakePage,
+  component: lazyRouteComponent(() => import("@/features/water-intake/WaterIntakePage"), "WaterIntakePage"),
 });
 
 const routeTree = rootRoute.addChildren([

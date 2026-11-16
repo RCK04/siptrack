@@ -129,7 +129,9 @@ const result = await Bun.build({
   outdir,
   plugins: [plugin],
   minify: true,
+  splitting: true,
   target: "browser",
+  publicPath: "/",
   sourcemap: "linked",
   define: {
     "process.env.NODE_ENV": JSON.stringify("production"),
@@ -141,6 +143,11 @@ const result = await Bun.build({
 });
 
 const end = performance.now();
+
+if (!result.success) {
+  for (const log of result.logs) console.error(log);
+  throw new Error("Application build failed.");
+}
 
 const outputTable = result.outputs.map(output => ({
   File: path.relative(process.cwd(), output.path),
