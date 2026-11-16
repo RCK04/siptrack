@@ -8,10 +8,10 @@ export const NavigationMenu = () => {
     <div className="flex items-center gap-3">
       <Show when="signed-out">
         <Button asChild variant="ghost">
-          <Link to="/sign-in/$">Sign in</Link>
+          <Link to="/sign-in/$" params={{ _splat: "" }}>Sign in</Link>
         </Button>
         <Button asChild>
-          <Link to="/sign-up/$">Create account</Link>
+          <Link to="/sign-up/$" params={{ _splat: "" }}>Create account</Link>
         </Button>
       </Show>
       <Show when="signed-in">
