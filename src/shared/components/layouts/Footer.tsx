@@ -27,7 +27,7 @@ export const Footer = ({
     )}
     {...props}
   >
-    {showBrand && <SiteBrand className={cn("text-xl", brandClassName)} />}
+    {showBrand && <SiteBrand className={cn("h-8 w-[110px] md:h-8 md:w-[110px]", brandClassName)} />}
     {message && <span>{message}</span>}
     {children}
   </footer>

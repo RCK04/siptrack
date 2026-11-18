@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Droplet } from "lucide-react";
 
+import logo from "@/shared/assets/brand/siptrack-horizontal-color.svg";
 import { cn } from "@/shared/lib/utils";
 
 export const SiteBrand = ({ className }: { className?: string }) => (
@@ -8,11 +8,10 @@ export const SiteBrand = ({ className }: { className?: string }) => (
     to="/"
     aria-label="Siptrack home"
     className={cn(
-      "inline-flex w-fit shrink-0 items-center gap-[7px] font-display text-2xl leading-none font-semibold text-flow-ink hover:text-teal-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-flow-ink",
+      "inline-flex h-8 w-[110px] shrink-0 items-center justify-center overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-flow-ink md:h-10 md:w-[130px]",
       className,
     )}
   >
-    <Droplet className="h-6 w-[21px] stroke-[1.8]" aria-hidden="true" />
-    siptrack
+    <img src={logo} alt="" width={740} height={290} className="block w-full max-w-none shrink-0" />
   </Link>
 );

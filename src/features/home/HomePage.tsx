@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import wordmark from "@/shared/assets/brand/siptrack-wordmark-color.svg";
 import { Footer } from "@/shared/components/layouts/Footer";
 import Header from "@/shared/components/layouts/Header";
 import { SkipLink } from "@/shared/components/layouts/SkipLink";
@@ -185,20 +186,13 @@ const HomePage = () => {
                   className="home-wordmark"
                   aria-label="Siptrack"
                 >
-                  {"siptrack".split("").map((letter, index) => (
-                    <span
-                      key={index}
-                      className="home-letter-mask"
-                      aria-hidden="true"
-                    >
-                      <span
-                        style={{ animationDelay: `${0.18 + index * 0.055}s` }}
-                      >
-                        {letter}
-                      </span>
-                    </span>
-                  ))}
-                  <Droplet className="home-wordmark-drop" aria-hidden="true" />
+                  <img
+                    src={wordmark}
+                    alt=""
+                    width={431}
+                    height={204}
+                    className="home-wordmark-image home-enter"
+                  />
                 </h1>
               </div>
               <div className="home-hero-copy home-enter">
